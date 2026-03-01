@@ -1,0 +1,45 @@
+//FOR AUTHENTICATION OF USER ACQUIRING BCRRPY FOR PASSWROD JWT FOR SESSION TOKEN
+const bcrypt= require("bcrypt")
+const jwt= require("jsonwebtoken")
+const User= require('../models/user.model') //acquiring user model as we have to verify the user only
+const { json } = require("express")
+
+const sign_up= async (req,res) => {
+    try{
+        const{name,email,password}= req.body //accepting data from sign up form
+
+        const existing_user= await User.findOne({email}) //checking if email already exists
+        if(existing_user) return res.status(400).json({message:"User already exists"});
+
+        const encrypted_password= await bcrypt.hash(password,10) //eccrypting password for storing user in datavase
+        const new_user= await User.create({name:name,email:email,password:encrypted_password})
+
+        const token= jwt.sign({id:new_user._id}, process.env.JWT_SECRET,{expiresIn: '7d'}) //assigning session token
+        res.status(201).json({token,user:{id:new_user._id,name:new_user.name,email:new_user.email}})
+
+    }
+    catch(err){
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+}
+
+const log_in= async (req,res) => {
+    try{
+        const {email,password}= req.body
+
+        const entered_user= await User.findOne({email}) //checking if user has entered valid email
+        if(!entered_user) res.status(404).json({message:"The entered email is not registered"});
+        
+        const isMatch= await bcrypt.compare(password, entered_user.password) //and valid password
+        if(!isMatch) res.status(400).json({message:"invalid credentials"});
+
+        const token= jwt.sign({id:entered_user._id}, process.env.JWT_SECRET,{expiresIn: '7d'}) //if yes assigning authetnicity token
+        res.status(201).json({token,user:{id:entered_user._id,name:entered_user.name,email:entered_user.email}})
+    }
+    catch(err)
+    {
+        res.status(500).json({ message: 'Server error', error: err.message });
+    }
+}
+
+module.exports= {log_in,sign_up}
