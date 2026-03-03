@@ -10,6 +10,7 @@ dotenv.config() //important to process enviroenment variables
 const authRoutes= require('./routes/auth.routes')
 const groupRoutes= require('./routes/group.routes')
 const expenseRoutes= require('./routes/expense.routes')
+const settlementRoutes= require('./routes/settlement.routes')
 
 const app= express()
 //using the imported middlewares and routers
@@ -18,6 +19,7 @@ app.use(express.urlencoded({extended:true})) //url se aaya hua data accept krne 
 app.use('/api/auth', authRoutes)
 app.use('/api/groups', groupRoutes)
 app.use('/api/expenses',expenseRoutes)
+app.use('/api/settlement',settlementRoutes)
 
 
 
