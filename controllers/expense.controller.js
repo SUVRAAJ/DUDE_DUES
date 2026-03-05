@@ -37,7 +37,7 @@ const add_expense= async (req,res) => {
   }
   catch(err)
   {
-    res.status(500).json({message:"server error",error:err})
+    res.status(500).json({message:"server error",error:err.message})
   }
 }
 
@@ -52,7 +52,7 @@ const get_group_expense= async (req,res) => {
   }
   catch(err)
   {
-    res.status(500).json({message:"server error", error:err})
+    res.status(500).json({message:"server error", error:err.message})
   }
 }
 

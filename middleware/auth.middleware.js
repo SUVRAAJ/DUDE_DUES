@@ -6,12 +6,12 @@ const verify_authentication= (req,res,next) => {
 
   try{
     const verified_token= jwt.verify(token,process.env.JWT_SECRET) //verifying if the token has been altercated
-    req.user=verified_token //popilating request.user with verified_token
+    req.user=verified_token //populating request.user with verified_token
     next()
   }
   catch(err)
   {
-    res.status(401).json({message:"invalid or expired token"})
+    res.status(401).json({message:"invalid or expired token", error:err.message})
   }
 }
 
