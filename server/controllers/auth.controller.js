@@ -42,4 +42,18 @@ const log_in= async (req,res) => {
     }
 }
 
-module.exports= {log_in,sign_up}
+const find_user= async (req,res) => {
+  try {
+    const {email}= req.query
+
+    const user= await User.findOne({email})
+    if(!user) return res.status(404).json({message:"The user was not found"});
+
+    res.status(200).json({user})
+  } catch (error) {
+    res.status(500).json({message:"server error", error:error.message})
+  }
+}
+
+
+module.exports= {log_in,sign_up,find_user}
