@@ -6,7 +6,7 @@ const settlement_algo= async (req,res) => {
   try{
     const {group_id}= req.params
 
-    const check_group= await Group.findById(group_id).populate('members', 'name, email')
+    const check_group= await Group.findById(group_id).populate('members', 'name email')
     if(!check_group) return res.status(404).json({message:"Group not found"});
 
     const check_expense= await Expense.find({group:group_id})
