@@ -3,7 +3,8 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
-
+import CreateGroup from './pages/CreateGroup'
+import GroupDetail from './pages/GroupDetail'
 function App() {
   return (
     <BrowserRouter>
@@ -15,6 +16,16 @@ function App() {
             <Dashboard/>
           </ProtectedRoutes>
         } />
+        <Route path='/create-group' element={
+          <ProtectedRoutes>
+            <CreateGroup/>
+          </ProtectedRoutes>
+        }/>
+        <Route path='group/:id' element={
+          <ProtectedRoutes>
+            <GroupDetail/>
+          </ProtectedRoutes>
+        }/>
 
       </Routes>
     </BrowserRouter>
