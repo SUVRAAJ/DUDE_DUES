@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axios, { Axios } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import API from "../api/axios"
@@ -98,6 +98,17 @@ const GroupDetail = () => {
 
     } catch (err) {
       setMember_msg(err.response?.data?.message || "Failed to add member")
+    }
+  }
+
+  //handler for mrking as settled route
+  const handle_settle= async (expense_id) => {
+    try {
+      await API.patch(`/expenses/settle/${expense_id}`)
+      const res= await API.get(`/expenses/group/${id}`)
+      setExpenses(res.data.check_group)
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -267,6 +278,7 @@ const GroupDetail = () => {
                     <span className="text-zinc-300 font-medium">{s.from.name}</span>
                     <span className="text-zinc-600">→</span>
                     <span className="text-zinc-300 font-medium">{s.to.name}</span>
+                    {console.log("settlements:", settlements)}
                   </div>
                   <span className="text-indigo-400 font-bold">₹{s.amount_trans}</span>
                 </div>
@@ -300,6 +312,7 @@ const GroupDetail = () => {
         <Tooltip
           contentStyle={{ backgroundColor: "#18181b", border: "1px solid #3f3f46", borderRadius: "12px" }}
           labelStyle={{ color: "#fff" }}
+          itemStyle={{ color: "#fff" }}
           formatter={(value) => [`₹${value}`, ""]}
         />
         <Legend
@@ -320,23 +333,42 @@ const GroupDetail = () => {
             </div>
           ) : (
             <div className="flex flex-col gap-3">
-              {expenses.map((expense, i) => (
-                <div key={i} className="flex items-center justify-between bg-zinc-800 px-4 py-4 rounded-xl">
-                  <div className="flex items-center gap-3">
-                    <span className={`text-xs px-2 py-1 rounded-lg font-medium ${category_colors[expense.category] || category_colors.general}`}>
-                      {expense.category}
-                    </span>
-                    <div>
-                      <p className="text-white font-medium">{expense.description}</p>
-                      <p className="text-zinc-500 text-xs">Paid by {expense.paid_by?.name}</p>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-white font-bold">₹{expense.total_amount}</p>
-                    <p className="text-zinc-500 text-xs">₹{expense.splits[0]?.amount} each</p>
-                  </div>
-                </div>
-              ))}
+            {expenses.map((expense, i) => {
+  const my_split = expense.splits.find(s => s.user._id === user?.id)
+  return (
+    <div key={i} className="flex items-center justify-between bg-zinc-800 px-4 py-4 rounded-xl">
+      <div className="flex items-center gap-3">
+        <span className={`text-xs px-2 py-1 rounded-lg font-medium ${category_colors[expense.category] || category_colors.general}`}>
+          {expense.category}
+        </span>
+        <div>
+          <p className="text-white font-medium">{expense.description}</p>
+          <p className="text-zinc-500 text-xs">Paid by {expense.paid_by?.name}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        <div className="text-right">
+          <p className="text-white font-bold">₹{expense.total_amount}</p>
+          <p className="text-zinc-500 text-xs">₹{expense.splits[0]?.amount} each</p>
+        </div>
+        {my_split && !my_split.is_paid && expense.paid_by?._id !== user?.id && (
+          <button
+            onClick={() => handle_settle(expense._id)}
+            className="text-xs bg-green-500/20 hover:bg-green-500/30 text-green-400 px-3 py-1.5 rounded-lg transition"
+          >
+            Settle
+          </button>
+        )}
+        {my_split?.is_paid && (
+          <span className="text-xs bg-zinc-700 text-zinc-400 px-3 py-1.5 rounded-lg">
+            Settled ✓
+          </span>
+        )}
+      </div>
+    </div>
+  )
+})}
+
             </div>
           )}
         </div>
