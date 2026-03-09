@@ -23,8 +23,9 @@ const create_group= async (req,res) => {
 const add_members= async (req,res) => {
   try{
     const {user_id,group_id}= req.body
+    console.log("add member body:", req.body) 
 
-  const check_group= await Group.findById({group_id})
+  const check_group= await Group.findById(group_id)
   if(!check_group) return res.status(404).json({message:"group not found"}); //checking if group exists or not
 
   //checkinf if the member is admin or not

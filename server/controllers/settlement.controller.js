@@ -12,7 +12,6 @@ const settlement_algo= async (req,res) => {
     const check_expense= await Expense.find({group:group_id})
 
     //using an object of objects to find the net amount for each member
-
     const balances={}
     //initiaizing for each member
     check_group.members.forEach(element => {
@@ -44,7 +43,7 @@ const settlement_algo= async (req,res) => {
 
     //transaction steps
 
-    const transactions=[]
+    const transactions=[] //array of objects
     let i=0,j=0;
 
     while(i<creditors.length && j<debtors.length)
