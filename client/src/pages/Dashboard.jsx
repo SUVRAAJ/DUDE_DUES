@@ -51,7 +51,15 @@ const Dashboard = () => {
           >
             Logout
           </button>
+
+          <button
+          onClick={() => navigate("/balances")}
+          className="text-zinc-400 hover:text-white text-sm transition"
+        >
+          My Balance
+        </button>
         </div>
+        
       </nav>
 
       <div className="max-w-5xl mx-auto px-6 py-10">
