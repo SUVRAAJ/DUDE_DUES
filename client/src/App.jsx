@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard'
 import ProtectedRoutes from './components/ProtectedRoutes'
 import CreateGroup from './pages/CreateGroup'
 import GroupDetail from './pages/GroupDetail'
+import Balances from './pages/Balances'
 function App() {
   return (
     <BrowserRouter>
@@ -21,9 +22,15 @@ function App() {
             <CreateGroup/>
           </ProtectedRoutes>
         }/>
-        <Route path='group/:id' element={
+        <Route path='/group/:id' element={
           <ProtectedRoutes>
             <GroupDetail/>
+          </ProtectedRoutes>
+        }/>
+
+        <Route path='/balances' element={
+          <ProtectedRoutes>
+            <Balances/>
           </ProtectedRoutes>
         }/>
 
