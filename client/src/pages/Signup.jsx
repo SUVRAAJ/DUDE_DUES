@@ -13,7 +13,13 @@ const Signup = () => {
 
     const handle_signup= async (event) => {
         try {
-            const res= await API.post('auth/signup',
+          const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          const password_regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+
+          if (!email_regex.test(email)) return setError("Please enter a valid email")
+          if (!password_regex.test(password)) return setError("Password must be at least 8 characters with letters and numbers")
+          if (!name.trim()) return setError("Name cannot be empty")  
+          const res= await API.post('auth/signup',
                 {
                     name,
                     email,

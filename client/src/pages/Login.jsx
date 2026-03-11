@@ -17,6 +17,9 @@ const Login = () => {
         //preventing default nature
         try{
             //sending an api call for login if successful login we get user and token from auth controller
+            const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            if (!email_regex.test(email)) return setError("Please enter a valid email")
+            if (!password) return setError("Password cannot be empty")
             const res= await API.post('/auth/login',{
                 email,
                 password

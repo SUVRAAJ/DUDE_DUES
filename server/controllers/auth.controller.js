@@ -6,6 +6,13 @@ const { json } = require("express")
 
 const sign_up= async (req,res) => {
     try{
+        const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        const password_regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
+
+        if (!email_regex.test(email)) return res.status(400).json({message: "Invalid email format"})
+        if (!password_regex.test(password)) return res.status(400).json({message: "Password must be at least 8 characters with letters and numbers"})
+        if (!name || !name.trim()) return res.status(400).json({message: "Name is required"})
+        
         const{name,email,password}= req.body //accepting data from sign up form
 
         const existing_user= await User.findOne({email}) //checking if email already exists
