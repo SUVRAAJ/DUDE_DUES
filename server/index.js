@@ -15,7 +15,8 @@ const settlementRoutes= require('./routes/settlement.routes')
 const app= express()
 //using the imported middlewares and routers
 app.use(cors({
-    origin: 'http://localhost:5173' 
+    origin: ['http://localhost:5173', 'https://dude-dues.vercel.app'],
+    credentials: true
 }));
 app.use(express.json()) //json data accept krne ke liye
 app.use(express.urlencoded({extended:true})) //url se aaya hua data accept krne ke loye
