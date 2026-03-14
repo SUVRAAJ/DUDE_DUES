@@ -155,28 +155,28 @@ const GroupDetail = () => {
           ← Back
         </button>
       </nav>
-      <div className="max-w-4xl mx-auto px-6 py-10">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 sm:py-10">
 
         {/* Group Header */}
-        <div className="flex items-start justify-between mb-8">
-          <div>
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-12 h-12 bg-indigo-600/20 rounded-2xl flex items-center justify-center text-indigo-400 font-bold text-xl">
-                {group?.name[0].toUpperCase()}
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold text-white">{group?.name}</h1>
-                <p className="text-zinc-500 text-sm">{group?.description || "No description"}</p>
-              </div>
-            </div>
-          </div>
-          <button
-            onClick={() => setShow_form(!show_form)}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-5 py-2.5 rounded-xl transition"
-          >
-            + Add Expense
-          </button>
-        </div>
+          <div className="flex items-start justify-between mb-8 gap-3">
+  <div>
+    <div className="flex items-center gap-3 mb-2">
+      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-indigo-600/20 rounded-2xl flex items-center justify-center text-indigo-400 font-bold text-lg sm:text-xl">
+        {group?.name[0].toUpperCase()}
+      </div>
+      <div>
+        <h1 className="text-xl sm:text-2xl font-bold text-white">{group?.name}</h1>
+        <p className="text-zinc-500 text-sm">{group?.description || "No description"}</p>
+      </div>
+    </div>
+  </div>
+  <button
+    onClick={() => setShow_form(!show_form)}
+    className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-3 sm:px-5 py-2.5 rounded-xl transition text-sm whitespace-nowrap"
+  >
+    + Add Expense
+  </button>
+</div>
 
         {/* Members */}
         <div className="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 mb-6">
@@ -336,36 +336,36 @@ const GroupDetail = () => {
             {expenses.map((expense, i) => {
   const my_split = expense.splits.find(s => s.user._id === user?.id)
   return (
-    <div key={i} className="flex items-center justify-between bg-zinc-800 px-4 py-4 rounded-xl">
-      <div className="flex items-center gap-3">
-        <span className={`text-xs px-2 py-1 rounded-lg font-medium ${category_colors[expense.category] || category_colors.general}`}>
-          {expense.category}
-        </span>
-        <div>
-          <p className="text-white font-medium">{expense.description}</p>
-          <p className="text-zinc-500 text-xs">Paid by {expense.paid_by?.name}</p>
-        </div>
-      </div>
-      <div className="flex items-center gap-3">
-        <div className="text-right">
-          <p className="text-white font-bold">₹{expense.total_amount}</p>
-          <p className="text-zinc-500 text-xs">₹{expense.splits[0]?.amount} each</p>
-        </div>
-        {my_split && !my_split.is_paid && expense.paid_by?._id !== user?.id && (
-          <button
-            onClick={() => handle_settle(expense._id)}
-            className="text-xs bg-green-500/20 hover:bg-green-500/30 text-green-400 px-3 py-1.5 rounded-lg transition"
-          >
-            Settle
-          </button>
-        )}
-        {my_split?.is_paid && (
-          <span className="text-xs bg-zinc-700 text-zinc-400 px-3 py-1.5 rounded-lg">
-            Settled ✓
-          </span>
-        )}
-      </div>
+    <div key={i} className="flex items-start sm:items-center justify-between bg-zinc-800 px-3 sm:px-4 py-4 rounded-xl gap-2">
+  <div className="flex items-start sm:items-center gap-2 sm:gap-3 flex-1 min-w-0">
+    <span className={`text-xs px-2 py-1 rounded-lg font-medium shrink-0 ${category_colors[expense.category] || category_colors.general}`}>
+      {expense.category}
+    </span>
+    <div className="min-w-0">
+      <p className="text-white font-medium text-sm sm:text-base truncate">{expense.description}</p>
+      <p className="text-zinc-500 text-xs">Paid by {expense.paid_by?.name}</p>
     </div>
+  </div>
+  <div className="flex items-center gap-2 shrink-0">
+    <div className="text-right">
+      <p className="text-white font-bold text-sm sm:text-base">₹{expense.total_amount}</p>
+      <p className="text-zinc-500 text-xs">₹{expense.splits[0]?.amount} each</p>
+    </div>
+    {my_split && !my_split.is_paid && expense.paid_by?._id !== user?.id && (
+      <button
+        onClick={() => handle_settle(expense._id)}
+        className="text-xs bg-green-500/20 hover:bg-green-500/30 text-green-400 px-2 sm:px-3 py-1.5 rounded-lg transition"
+      >
+        Settle
+      </button>
+    )}
+    {my_split?.is_paid && (
+      <span className="text-xs bg-zinc-700 text-zinc-400 px-2 sm:px-3 py-1.5 rounded-lg">
+        Settled ✓
+      </span>
+    )}
+  </div>
+</div>
   )
 })}
 

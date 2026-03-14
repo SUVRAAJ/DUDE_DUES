@@ -70,8 +70,8 @@ const Signup = () => {
       </div>
 
       {/* Right Panel */}
-      <div className="flex-1 flex items-center justify-center p-8">
-        <div className="w-full max-w-sm">
+      <div className="flex-1 flex items-center justify-center p-6 sm:p-8">
+        <div className="w-full max-w-sm mx-auto">
           <div className="lg:hidden mb-10">
             <span className="text-white text-2xl font-bold tracking-tight">Dude<span className="text-indigo-400">Dues</span></span>
           </div>

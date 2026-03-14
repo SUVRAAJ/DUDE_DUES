@@ -41,42 +41,40 @@ const Dashboard = () => {
       <div style={{ fontFamily: "'DM Sans', sans-serif" }} className="min-h-screen bg-zinc-950">
       
       {/* Navbar */}
-      <nav className="border-b border-zinc-900 px-6 py-4 flex items-center justify-between">
-        <span className="text-white text-xl font-bold tracking-tight">Dude<span className="text-indigo-400">Dues</span></span>
-        <div className="flex items-center gap-4">
-          <span className="text-zinc-400 text-sm">Hey, {user?.name} 👋</span>
-          <button
-            onClick={handle_logout}
-            className="text-zinc-500 hover:text-white text-sm transition"
-          >
-            Logout
-          </button>
-
-          <button
-          onClick={() => navigate("/balances")}
-          className="text-zinc-400 hover:text-white text-sm transition"
-        >
-          My Balance
-        </button>
-        </div>
-        
-      </nav>
+      <nav className="border-b border-zinc-900 px-4 py-4 flex items-center justify-between">
+  <span className="text-white text-xl font-bold tracking-tight">Dude<span className="text-indigo-400">Dues</span></span>
+  <div className="flex items-center gap-2 sm:gap-4">
+    <span className="hidden sm:block text-zinc-400 text-sm">Hey, {user?.name} 👋</span>
+    <button
+      onClick={() => navigate("/balances")}
+      className="text-zinc-400 hover:text-white text-sm transition"
+    >
+      Balance
+    </button>
+    <button
+      onClick={handle_logout}
+      className="text-zinc-500 hover:text-white text-sm transition"
+    >
+      Logout
+    </button>
+  </div>
+</nav>
 
       <div className="max-w-5xl mx-auto px-6 py-10">
         
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div>
-            <h1 className="text-3xl font-bold text-white">Your Groups</h1>
-            <p className="text-zinc-500 mt-1">Manage expenses across all your groups</p>
-          </div>
-          <button
-            onClick={() => navigate("/create-group")}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-5 py-2.5 rounded-xl transition"
-          >
-            + New Group
-          </button>
+          <div className="flex items-center justify-between mb-8 gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold text-white">Your Groups</h1>
+          <p className="text-zinc-500 mt-1 text-sm sm:text-base">Manage expenses across all your groups</p>
         </div>
+        <button
+          onClick={() => navigate("/create-group")}
+          className="bg-indigo-600 hover:bg-indigo-500 text-white font-semibold px-4 sm:px-5 py-2.5 rounded-xl transition text-sm sm:text-base whitespace-nowrap"
+        >
+          + New Group
+        </button>
+      </div>
 
         {/* Groups Grid */}
         {loading ? (
