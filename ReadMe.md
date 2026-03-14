@@ -93,23 +93,23 @@ npm run dev
 
 ### Login Page
 
-![alt text](image.png)
+![Login Page](image.png)
 
 ### Dashboard
 
-![alt text](image-1.png)
+![Dashboard](image-1.png)
 
 ### Group Detail Page
 
-![alt text](image-2.png)
+![Group Detail Page](image-2.png)
 
 ### Who Pays Whom
 
-![alt text](image-3.png)
+![Who Pays Whom](image-3.png)
 
 ### Balances Page
 
-![alt text](image-4.png)
+![Balances Page](image-4.png)
 
 ---
 
