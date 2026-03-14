@@ -228,7 +228,7 @@ const GroupDetail = () => {
                 onChange={(e) => setDescription(e.target.value)}
                 className="w-full bg-zinc-800 border border-zinc-700 text-white px-4 py-3 rounded-xl outline-none focus:border-indigo-500 transition placeholder-zinc-600"
               />
-              <div className="flex gap-3">
+              <div className="flex flex-col sm:flex-row gap-3">
                 <input
                   type="number"
                   placeholder="Amount (₹)"
