@@ -14,7 +14,7 @@ const Dashboard = () => {
     const fetch_groups= async () => {
       try {
         const res= await API.get('/groups/my-groups')
-        console.log(res.data)
+
         setGroups(res.data.showed_groups)
       } catch (error) {
         console.log(error)

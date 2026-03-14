@@ -36,8 +36,7 @@ const GroupDetail = () => {
             ]
         )
 
-        console.log("expense res:", expense_res.data)
-    console.log("settlement res:", settlement_res.data)
+
         const found_group= group_res.data.showed_groups.find(g=> g._id===id)
         setGroup(found_group)
         setExpenses(expense_res.data.check_group)
