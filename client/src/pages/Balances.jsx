@@ -83,11 +83,11 @@ const Balances = () => {
                       <p className="text-zinc-500 text-xs mb-1">{t.group_name}</p>
                       {is_debtor ? (
                         <p className="text-white">
-                          You owe <span className="text-red-400 font-semibold">{t.to.email}</span>
+                          You owe <span className="text-red-400 font-semibold">{t.to.name}</span>
                         </p>
                       ) : (
                         <p className="text-white">
-                          <span className="text-green-400 font-semibold">{t.from.email}</span> owes you
+                          <span className="text-green-400 font-semibold">{t.from.name}</span> owes you
                         </p>
                       )}
                     </div>
