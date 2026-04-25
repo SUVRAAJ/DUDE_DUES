@@ -6,11 +6,13 @@ import ProtectedRoutes from './components/ProtectedRoutes'
 import CreateGroup from './pages/CreateGroup'
 import GroupDetail from './pages/GroupDetail'
 import Balances from './pages/Balances'
+import Landing from './pages/Landing'
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<Login />} />
+        <Route path='/' element={<Landing />} />
+        <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<Signup />} />
         <Route path='/dashboard' element={
           <ProtectedRoutes>
